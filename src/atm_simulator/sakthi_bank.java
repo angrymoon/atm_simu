@@ -1,49 +1,50 @@
 package atm_simulator;
 import java.util.*;
 
+
+
 public class sakthi_bank {
 
 	public static void main(String[] args) {
 	 String name=null,pass=null,n1=null,p1=null;
-	 double amount=0,draw=0,a=0,balance=0;
+	 double amount=0,draw=0;
 	
 	 int option,index;
 	Scanner sc=new Scanner(System.in);
 	
-	ArrayList<String> details;
-	ArrayList<Double> details1;
+	ArrayList<BankAccount> bank =new ArrayList<BankAccount>();
+	BankAccount d1;
 	
-	details=new ArrayList<String>();
-	details1=new ArrayList<Double>();
+	
+	
 	try
 	{
 	while (true) 
 	{
+	double balance=0;
 		System.out.println("\t\t\t\t\t ----------------------");
 		System.out.println("\t\t\t\t\t WELCOME TO SAKTHI BANK");
 		System.out.println("\t\t\t\t\t ----------------------");
-		System.out.println("1.Create account:");
-		System.out.println("2.Enter into your account");
-		System.out.println("3.Depost amount:");
-		System.out.println("4.Withdraw amount:");
-		System.out.println("5.Balance enquiry:");
-		System.out.println("6.Exit");
+		System.out.println("1.Enter into your account");
+		System.out.println("2.Depost amount:");
+		System.out.println("3.Withdraw amount:");
+		System.out.println("4.Balance enquiry:");
+		System.out.println("5.Exit");
+		
 
 		option=sc.nextInt();
 		switch(option)
 		{
 		
 		case 1:
-			for (int i = 0; i < 2; i++) {
+		
 	            
 			System.out.println("Enter your name ");
 			name=sc.next();
-			details.add(name);
 			System.out.println("Enter your passwordd ");
 			pass=sc.next();
-			details.add(pass);
-			System.out.println("your account is created ");
-			}
+			d1=new BankAccount(name, pass);
+			bank.add(d1);
 			break;
 			
 			
@@ -53,50 +54,63 @@ public class sakthi_bank {
 			n1=sc.next();
 			System.out.println("Enter your password ");
 			p1=sc.next();
-			if(n1.equals(name)&&p1.equals(pass)) {
-				System.out.printf("Glad to meet you MR/MRS/MISS   %S",n1);
+			for(BankAccount b:bank)
+			{
+				if(b.name.equals(n1)&&b.password.equals(p1))
+				{
+					System.out.print("enter your amount to be deposited");
+					
+					amount=sc.nextDouble();
+					b.balance=b.balance+amount;
+				}
 			}
-			else {
-				System.out.println("please enter the userid or password correctly");
-			}
+			System.out.printf("your amount %f is deposited successfully",amount);
 			break;
 		
 		case 3:
-			System.out.println("Enter the amount to be deposited ");
-			amount=sc.nextDouble();
-			if(n1.equals(name)&&p1.equals(pass)) {
-				balance=balance+amount;
-				details1.add(balance);
-				System.out.printf("your amount %f is deposited successfully\n ",amount);
+			System.out.println("Enter your userid ");
+			n1=sc.next();
+			System.out.println("Enter your password ");
+			p1=sc.next();
+			for(BankAccount b:bank)
+			{
+			if(b.name.equals(n1)&&b.password.equals(p1))
+			{
+				System.out.print("enter your amount to be credit");
+				
+				draw=sc.nextDouble();
+				b.balance=b.balance-draw;	
+				
 			}
-			
+			}
+			System.out.printf("your amount %f is credit successfully",draw);
 			break;
 		
 		case 4:
-			System.out.println("Enter your amount to be debited ");
-			draw=sc.nextDouble();
-			if(n1.equals(name)&&p1.equals(pass)) {
-				balance=balance-draw;
-				System.out.printf("your amount %f is debited successfully ",draw);
-				details1.add(draw);
+			
+			System.out.println("Enter your userid ");
+			n1=sc.next();
+			System.out.println("Enter your password ");
+			p1=sc.next();
+			for(BankAccount b:bank)
+			{
+			if(b.name.equals(n1)&&b.password.equals(p1))
+			{
+			
+				System.out.printf("BALANCE AMOUNT IN YOUR ACCOUNT %f",b.balance);
+				
+			}
 			}
 			break;
-		
-		case 5:
-			if(n1.equals(name)&&p1.equals(pass)) {
-				System.out.println("The balance is "+balance);
-				}
-		
-			break;
 	
-		case 6:
+		case 5:
 			System.out.println("\t\t\t\t\t -------------------------------");
 			System.out.println("\t\t\t\t\t THANK YOU FOR USING SAKTHI BANK");
 			System.out.println("\t\t\t\t\t -------------------------------");
 			break;
 			default:
 				System.out.println("Please enter a valid choice");
-			if(option==6)
+			if(option==5)
 			{
 				break;
 			}
@@ -107,8 +121,8 @@ public class sakthi_bank {
 	
 	}//while end
 	
-	}catch(NullPointerException ex) {
-		System.out.println("ERROR OCCURED"+ex);
+	}catch(InputMismatchException ex) {
+		System.out.println("ERROR OCCURED");
 		
 	}//catch end
 	}//main end
