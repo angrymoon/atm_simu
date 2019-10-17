@@ -21,12 +21,12 @@ public class sakthi_bank {
 	{
 	while (true) 
 	{
-	double balance=0;
+	
 		System.out.println("\t\t\t\t\t ----------------------");
-		System.out.println("\t\t\t\t\t WELCOME TO SAKTHI BANK");
+		System.out.println("\t\t\t\t\t WELCOME TO SAS BANK");
 		System.out.println("\t\t\t\t\t ----------------------");
-		System.out.println("1.Enter into your account");
-		System.out.println("2.Depost amount:");
+		System.out.println("1.Create and Enter into your account");
+		System.out.println("2.Deposit amount:");
 		System.out.println("3.Withdraw amount:");
 		System.out.println("4.Balance enquiry:");
 		System.out.println("5.Exit");
@@ -41,7 +41,7 @@ public class sakthi_bank {
 	            
 			System.out.println("Enter your name ");
 			name=sc.next();
-			System.out.println("Enter your passwordd ");
+			System.out.println("Enter your password ");
 			pass=sc.next();
 			d1=new BankAccount(name, pass);
 			bank.add(d1);
@@ -58,13 +58,17 @@ public class sakthi_bank {
 			{
 				if(b.name.equals(n1)&&b.password.equals(p1))
 				{
-					System.out.print("enter your amount to be deposited");
+					System.out.print("Enter your amount to be deposited");
 					
 					amount=sc.nextDouble();
 					b.balance=b.balance+amount;
+					System.out.printf("Your amount %f is deposited successfully",amount);
+				}
+				else {
+					System.out.print("Please check your UserID or Password");
 				}
 			}
-			System.out.printf("your amount %f is deposited successfully",amount);
+			
 			break;
 		
 		case 3:
@@ -76,14 +80,17 @@ public class sakthi_bank {
 			{
 			if(b.name.equals(n1)&&b.password.equals(p1))
 			{
-				System.out.print("enter your amount to be credit");
+				System.out.print("Enter your amount to be credit");
 				
 				draw=sc.nextDouble();
 				b.balance=b.balance-draw;	
+				System.out.printf("Your amount %f is credit successfully",draw);
 				
+			}else {
+				System.out.print("Please check your UserID or Password");
 			}
 			}
-			System.out.printf("your amount %f is credit successfully",draw);
+
 			break;
 		
 		case 4:
@@ -99,13 +106,15 @@ public class sakthi_bank {
 			
 				System.out.printf("BALANCE AMOUNT IN YOUR ACCOUNT %f",b.balance);
 				
+			}else {
+				System.out.print("Please check your UserID or Password");
 			}
 			}
 			break;
 	
 		case 5:
 			System.out.println("\t\t\t\t\t -------------------------------");
-			System.out.println("\t\t\t\t\t THANK YOU FOR USING SAKTHI BANK");
+			System.out.println("\t\t\t\t\t THANK YOU FOR USING SAS BANK");
 			System.out.println("\t\t\t\t\t -------------------------------");
 			break;
 			default:
@@ -122,7 +131,7 @@ public class sakthi_bank {
 	}//while end
 	
 	}catch(InputMismatchException ex) {
-		System.out.println("ERROR OCCURED");
+		System.err.println("ERROR OCCURED, PLEASE USE ONLY NUMBERS  ");
 		
 	}//catch end
 	}//main end
